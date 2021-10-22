@@ -5703,11 +5703,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\PC\\source\\repos\\AthleticsDocs\\AthleticsDocs\\AthleticsDocs.csproj",
+      "projectUniqueName": "C:\\Users\\PC\\Documents\\GitHub\\AthleticsDocs\\AthleticsDocs\\AthleticsDocs.csproj",
       "projectName": "AthleticsDocs",
-      "projectPath": "C:\\Users\\PC\\source\\repos\\AthleticsDocs\\AthleticsDocs\\AthleticsDocs.csproj",
+      "projectPath": "C:\\Users\\PC\\Documents\\GitHub\\AthleticsDocs\\AthleticsDocs\\AthleticsDocs.csproj",
       "packagesPath": "C:\\Users\\PC\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\PC\\source\\repos\\AthleticsDocs\\AthleticsDocs\\obj\\",
+      "outputPath": "C:\\Users\\PC\\Documents\\GitHub\\AthleticsDocs\\AthleticsDocs\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\PC\\AppData\\Roaming\\NuGet\\NuGet.Config",
