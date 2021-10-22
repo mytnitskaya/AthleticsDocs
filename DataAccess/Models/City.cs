@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace DataAccess.Models
 {
-    public class Rank
+    public class City
     {
         public Guid Id { get; set; }
         [Required]

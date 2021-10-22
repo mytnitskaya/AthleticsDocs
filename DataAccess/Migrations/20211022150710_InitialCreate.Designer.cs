@@ -4,14 +4,16 @@ using DataAccess.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace DataAccess.Migrations
 {
     [DbContext(typeof(AthleticsDocsContext))]
-    partial class AthleticsDocsContextModelSnapshot : ModelSnapshot
+    [Migration("20211022150710_InitialCreate")]
+    partial class InitialCreate
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -43,24 +45,24 @@ namespace DataAccess.Migrations
                     b.Property<Guid?>("CityId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid?>("FriendId")
-                        .HasColumnType("uniqueidentifier");
-
                     b.Property<Guid?>("OrganizationId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<Guid>("PersonId")
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<Guid?>("StudentId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.HasKey("Id");
 
                     b.HasIndex("CityId");
 
-                    b.HasIndex("FriendId");
-
                     b.HasIndex("OrganizationId");
 
                     b.HasIndex("PersonId");
+
+                    b.HasIndex("StudentId");
 
                     b.ToTable("Coaches");
                 });
@@ -174,9 +176,6 @@ namespace DataAccess.Migrations
                     b.Property<Guid?>("CityId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid?>("CoachId")
-                        .HasColumnType("uniqueidentifier");
-
                     b.Property<Guid?>("CompetitionId")
                         .HasColumnType("uniqueidentifier");
 
@@ -192,8 +191,6 @@ namespace DataAccess.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("CityId");
-
-                    b.HasIndex("CoachId");
 
                     b.HasIndex("CompetitionId");
 
@@ -412,10 +409,6 @@ namespace DataAccess.Migrations
                         .WithMany()
                         .HasForeignKey("CityId");
 
-                    b.HasOne("DataAccess.Models.Coach", "Friend")
-                        .WithMany()
-                        .HasForeignKey("FriendId");
-
                     b.HasOne("DataAccess.Models.Organization", "Organization")
                         .WithMany()
                         .HasForeignKey("OrganizationId");
@@ -425,6 +418,10 @@ namespace DataAccess.Migrations
                         .HasForeignKey("PersonId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.HasOne("DataAccess.Models.Student", null)
+                        .WithMany("Coaches")
+                        .HasForeignKey("StudentId");
                 });
 
             modelBuilder.Entity("DataAccess.Models.Competition", b =>
@@ -446,10 +443,6 @@ namespace DataAccess.Migrations
                     b.HasOne("DataAccess.Models.City", "City")
                         .WithMany()
                         .HasForeignKey("CityId");
-
-                    b.HasOne("DataAccess.Models.Coach", "Coach")
-                        .WithMany("Students")
-                        .HasForeignKey("CoachId");
 
                     b.HasOne("DataAccess.Models.Competition", null)
                         .WithMany("Students")

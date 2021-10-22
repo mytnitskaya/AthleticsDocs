@@ -28,41 +28,5 @@ namespace DataAccess.Facades
             get => _model.Id;
         }
 
-        public string FirstName
-        {
-            get => _model.FirstName;
-            set => _model.FirstName = value;
-        }
-
-        public string LastName
-        {
-            get => _model.LastName;
-            set => _model.LastName = value;
-        }
-
-        public string MiddleName
-        {
-            get => _model.MiddleName;
-            set => _model.MiddleName = value;
-        }
-
-        public DateTime BirthDate
-        {
-            get => _model.BirthDate;
-            set => _model.BirthDate = value;
-        }
-
-        public Rank Rank
-        {
-            get => (Rank)_model.Rank;
-            set => _model.Rank = (int) value;
-        }
-        //добавить switch для переделки в стринг если будут проблемы с вьюшкой
-
-        public List<Coach> Coaches
-        {
-            get => _model.Coaches;
-            set => _model.Coaches = value;
-        }
     }
 }

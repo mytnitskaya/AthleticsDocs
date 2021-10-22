@@ -6,14 +6,14 @@ namespace DataAccess.Models
 {
     public class Student
     {
-        [Key]
         public Guid Id { get; set; }
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
-        public string MiddleName { get; set; }
-        public DateTime BirthDate { get; set; }
-        public int Rank { get; set; }
+        [Required]
+        public Person Person { get; set; }
+        public Rank Rank { get; set; }
+        public City City { get; set; }
+        public Organization Organization { get; set; }
 
-        public List<Coach> Coaches { get; set; }
+        public Coach Coach { get; set; }
+
     }
 }

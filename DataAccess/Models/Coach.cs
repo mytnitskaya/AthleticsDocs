@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -6,14 +7,13 @@ namespace DataAccess.Models
 {
     public class Coach
     {
-        [Key]
         public Guid Id { get; set; }
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
-        public string MiddleName { get; set; }
+        [Required]
+        public Person Person { get; set; }
+        public City City { get; set; }
+        public Organization Organization { get; set; }
+        public Coach Friend { get; set; }
 
-        [ForeignKey("StudentId")]
-        public Guid StudentId { get; set; }
-        public Student Student { get; set; }
+        public virtual ICollection<Student> Students { get; set; } = new List<Student>();
     }
 }
