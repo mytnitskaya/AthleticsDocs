@@ -12,8 +12,8 @@ namespace DataAccess.Models
         public Rank Rank { get; set; }
         public City City { get; set; }
         public Organization Organization { get; set; }
-
         public Coach Coach { get; set; }
+        public Group Group { get; set; }
 
     }
 }
