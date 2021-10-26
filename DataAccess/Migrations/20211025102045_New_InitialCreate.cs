@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace DataAccess.Migrations
 {
-    public partial class InitialCreate : Migration
+    public partial class New_InitialCreate : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -59,7 +59,20 @@ namespace DataAccess.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Persons",
+                name: "LevelOfTrainings",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(nullable: false),
+                    Name = table.Column<string>(nullable: true),
+                    Duration = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_LevelOfTrainings", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "People",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(nullable: false),
@@ -74,7 +87,7 @@ namespace DataAccess.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Persons", x => x.Id);
+                    table.PrimaryKey("PK_People", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -228,9 +241,74 @@ namespace DataAccess.Migrations
                 {
                     table.PrimaryKey("PK_Organizations", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Organizations_Persons_DirectorId",
+                        name: "FK_Organizations_People_DirectorId",
                         column: x => x.DirectorId,
-                        principalTable: "Persons",
+                        principalTable: "People",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Coaches",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(nullable: false),
+                    PersonId = table.Column<Guid>(nullable: false),
+                    CityId = table.Column<Guid>(nullable: true),
+                    OrganizationId = table.Column<Guid>(nullable: true),
+                    FriendId = table.Column<Guid>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Coaches", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Coaches_Cities_CityId",
+                        column: x => x.CityId,
+                        principalTable: "Cities",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Coaches_Coaches_FriendId",
+                        column: x => x.FriendId,
+                        principalTable: "Coaches",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Coaches_Organizations_OrganizationId",
+                        column: x => x.OrganizationId,
+                        principalTable: "Organizations",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Coaches_People_PersonId",
+                        column: x => x.PersonId,
+                        principalTable: "People",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Groups",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(nullable: false),
+                    Name = table.Column<string>(nullable: true),
+                    LevelId = table.Column<Guid>(nullable: true),
+                    CoachId = table.Column<Guid>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Groups", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Groups_Coaches_CoachId",
+                        column: x => x.CoachId,
+                        principalTable: "Coaches",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Groups_LevelOfTrainings_LevelId",
+                        column: x => x.LevelId,
+                        principalTable: "LevelOfTrainings",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
@@ -244,6 +322,8 @@ namespace DataAccess.Migrations
                     RankId = table.Column<Guid>(nullable: true),
                     CityId = table.Column<Guid>(nullable: true),
                     OrganizationId = table.Column<Guid>(nullable: true),
+                    CoachId = table.Column<Guid>(nullable: true),
+                    GroupId = table.Column<Guid>(nullable: true),
                     CompetitionId = table.Column<Guid>(nullable: true)
                 },
                 constraints: table =>
@@ -256,9 +336,21 @@ namespace DataAccess.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
+                        name: "FK_Students_Coaches_CoachId",
+                        column: x => x.CoachId,
+                        principalTable: "Coaches",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
                         name: "FK_Students_Competitions_CompetitionId",
                         column: x => x.CompetitionId,
                         principalTable: "Competitions",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Students_Groups_GroupId",
+                        column: x => x.GroupId,
+                        principalTable: "Groups",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
@@ -268,54 +360,15 @@ namespace DataAccess.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_Students_Persons_PersonId",
+                        name: "FK_Students_People_PersonId",
                         column: x => x.PersonId,
-                        principalTable: "Persons",
+                        principalTable: "People",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Students_Ranks_RankId",
                         column: x => x.RankId,
                         principalTable: "Ranks",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Coaches",
-                columns: table => new
-                {
-                    Id = table.Column<Guid>(nullable: false),
-                    PersonId = table.Column<Guid>(nullable: false),
-                    CityId = table.Column<Guid>(nullable: true),
-                    OrganizationId = table.Column<Guid>(nullable: true),
-                    StudentId = table.Column<Guid>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Coaches", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Coaches_Cities_CityId",
-                        column: x => x.CityId,
-                        principalTable: "Cities",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_Coaches_Organizations_OrganizationId",
-                        column: x => x.OrganizationId,
-                        principalTable: "Organizations",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_Coaches_Persons_PersonId",
-                        column: x => x.PersonId,
-                        principalTable: "Persons",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_Coaches_Students_StudentId",
-                        column: x => x.StudentId,
-                        principalTable: "Students",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
@@ -365,6 +418,11 @@ namespace DataAccess.Migrations
                 column: "CityId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Coaches_FriendId",
+                table: "Coaches",
+                column: "FriendId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Coaches_OrganizationId",
                 table: "Coaches",
                 column: "OrganizationId");
@@ -375,14 +433,19 @@ namespace DataAccess.Migrations
                 column: "PersonId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Coaches_StudentId",
-                table: "Coaches",
-                column: "StudentId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Competitions_CityId",
                 table: "Competitions",
                 column: "CityId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Groups_CoachId",
+                table: "Groups",
+                column: "CoachId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Groups_LevelId",
+                table: "Groups",
+                column: "LevelId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Organizations_DirectorId",
@@ -395,9 +458,19 @@ namespace DataAccess.Migrations
                 column: "CityId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Students_CoachId",
+                table: "Students",
+                column: "CoachId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Students_CompetitionId",
                 table: "Students",
                 column: "CompetitionId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Students_GroupId",
+                table: "Students",
+                column: "GroupId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Students_OrganizationId",
@@ -433,7 +506,7 @@ namespace DataAccess.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
-                name: "Coaches");
+                name: "Students");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");
@@ -442,22 +515,28 @@ namespace DataAccess.Migrations
                 name: "AspNetUsers");
 
             migrationBuilder.DropTable(
-                name: "Students");
-
-            migrationBuilder.DropTable(
                 name: "Competitions");
 
             migrationBuilder.DropTable(
-                name: "Organizations");
+                name: "Groups");
 
             migrationBuilder.DropTable(
                 name: "Ranks");
 
             migrationBuilder.DropTable(
+                name: "Coaches");
+
+            migrationBuilder.DropTable(
+                name: "LevelOfTrainings");
+
+            migrationBuilder.DropTable(
                 name: "Cities");
 
             migrationBuilder.DropTable(
-                name: "Persons");
+                name: "Organizations");
+
+            migrationBuilder.DropTable(
+                name: "People");
         }
     }
 }

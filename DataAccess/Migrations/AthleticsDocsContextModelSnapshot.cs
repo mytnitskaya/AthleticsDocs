@@ -91,6 +91,47 @@ namespace DataAccess.Migrations
                     b.ToTable("Competitions");
                 });
 
+            modelBuilder.Entity("DataAccess.Models.Group", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid?>("CoachId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid?>("LevelId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CoachId");
+
+                    b.HasIndex("LevelId");
+
+                    b.ToTable("Groups");
+                });
+
+            modelBuilder.Entity("DataAccess.Models.LevelOfTraining", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<int>("Duration")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("LevelOfTrainings");
+                });
+
             modelBuilder.Entity("DataAccess.Models.Organization", b =>
                 {
                     b.Property<Guid>("Id")
@@ -147,7 +188,7 @@ namespace DataAccess.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Persons");
+                    b.ToTable("People");
                 });
 
             modelBuilder.Entity("DataAccess.Models.Rank", b =>
@@ -180,6 +221,9 @@ namespace DataAccess.Migrations
                     b.Property<Guid?>("CompetitionId")
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<Guid?>("GroupId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<Guid?>("OrganizationId")
                         .HasColumnType("uniqueidentifier");
 
@@ -196,6 +240,8 @@ namespace DataAccess.Migrations
                     b.HasIndex("CoachId");
 
                     b.HasIndex("CompetitionId");
+
+                    b.HasIndex("GroupId");
 
                     b.HasIndex("OrganizationId");
 
@@ -434,6 +480,17 @@ namespace DataAccess.Migrations
                         .HasForeignKey("CityId");
                 });
 
+            modelBuilder.Entity("DataAccess.Models.Group", b =>
+                {
+                    b.HasOne("DataAccess.Models.Coach", "Coach")
+                        .WithMany("Groups")
+                        .HasForeignKey("CoachId");
+
+                    b.HasOne("DataAccess.Models.LevelOfTraining", "Level")
+                        .WithMany()
+                        .HasForeignKey("LevelId");
+                });
+
             modelBuilder.Entity("DataAccess.Models.Organization", b =>
                 {
                     b.HasOne("DataAccess.Models.Person", "Director")
@@ -454,6 +511,10 @@ namespace DataAccess.Migrations
                     b.HasOne("DataAccess.Models.Competition", null)
                         .WithMany("Students")
                         .HasForeignKey("CompetitionId");
+
+                    b.HasOne("DataAccess.Models.Group", "Group")
+                        .WithMany("Students")
+                        .HasForeignKey("GroupId");
 
                     b.HasOne("DataAccess.Models.Organization", "Organization")
                         .WithMany()

@@ -25,7 +25,8 @@ namespace DataAccess.Data
                     new City { Name = "Томск" },
                     new City { Name = "Северск" }
                 };
-                cities.ForEach(x => context.Cities.AddRange(x));
+                //cities.ForEach(x => context.Cities.AddRange(x));
+                context.AddRange(cities);
                 context.SaveChanges();
 
                 var organizations = new List<Organization>
@@ -33,7 +34,8 @@ namespace DataAccess.Data
                     new Organization { Name = "МАУ ДО ДЮСШ УСЦ ВВС им. В.А. Шевелева" },
                     new Organization { Name = "СДЮСШОР №1 г. Томска" }
                 };
-                organizations.ForEach(x => context.Organizations.AddRange(x));
+                //organizations.ForEach(x => context.Organizations.AddRange(x));
+                context.AddRange(organizations);
                 context.SaveChanges();
 
                 var ranks = new List<Rank>
@@ -45,7 +47,8 @@ namespace DataAccess.Data
                     new Rank { Name = "2ю" },
                     new Rank { Name = "3ю" },
                 };
-                ranks.ForEach(x => context.Ranks.AddRange(x));
+                //ranks.ForEach(x => context.Ranks.AddRange(x));
+                context.AddRange(ranks);
                 context.SaveChanges();
 
                 var coaches = new List<Coach>
@@ -69,7 +72,8 @@ namespace DataAccess.Data
                     }
 
                 };
-                coaches.ForEach(x => context.Coaches.AddRange(x));
+                //coaches.ForEach(x => context.Coaches.AddRange(x));
+                context.AddRange(coaches);
                 context.SaveChanges();
 
                 var students = new List<Student>
@@ -152,7 +156,8 @@ namespace DataAccess.Data
                         City = cities.Single(x => x.Name == "Томск")
                     }
                 };
-                students.ForEach(x => context.Students.AddRange(x));
+                //students.ForEach(x => context.Students.AddRange(x));
+                context.AddRange(students);
                 context.SaveChanges();
 
 
