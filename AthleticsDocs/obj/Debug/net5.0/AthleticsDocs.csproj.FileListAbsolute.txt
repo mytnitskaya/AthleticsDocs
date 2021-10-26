@@ -83,3 +83,5 @@ C:\Users\PC\Documents\GitHub\AthleticsDocs\AthleticsDocs\obj\Debug\net5.0\Athlet
 C:\Users\PC\Documents\GitHub\AthleticsDocs\AthleticsDocs\obj\Debug\net5.0\ref\AthleticsDocs.dll
 C:\Users\PC\Documents\GitHub\AthleticsDocs\AthleticsDocs\obj\Debug\net5.0\AthleticsDocs.pdb
 C:\Users\PC\Documents\GitHub\AthleticsDocs\AthleticsDocs\obj\Debug\net5.0\AthleticsDocs.genruntimeconfig.cache
+C:\Users\PC\Documents\GitHub\AthleticsDocs\AthleticsDocs\bin\Debug\net5.0\DataAccess.dll
+C:\Users\PC\Documents\GitHub\AthleticsDocs\AthleticsDocs\bin\Debug\net5.0\DataAccess.pdb

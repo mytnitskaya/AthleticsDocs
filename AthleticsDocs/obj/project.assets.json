@@ -1652,6 +1652,25 @@
         "runtime": {
           "lib/netstandard1.3/System.Xml.XmlSerializer.dll": {}
         }
+      },
+      "DataAccess/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v5.0",
+        "dependencies": {
+          "Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore": "5.0.3",
+          "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "5.0.3",
+          "Microsoft.AspNetCore.Identity.UI": "5.0.3",
+          "Microsoft.EntityFrameworkCore.SqlServer": "5.0.3"
+        },
+        "compile": {
+          "bin/placeholder/DataAccess.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/DataAccess.dll": {}
+        },
+        "frameworkReferences": [
+          "Microsoft.AspNetCore.App"
+        ]
       }
     }
   },
@@ -6129,10 +6148,16 @@
         "system.xml.xmlserializer.4.3.0.nupkg.sha512",
         "system.xml.xmlserializer.nuspec"
       ]
+    },
+    "DataAccess/1.0.0": {
+      "type": "project",
+      "path": "../DataAccess/DataAccess.csproj",
+      "msbuildProject": "../DataAccess/DataAccess.csproj"
     }
   },
   "projectFileDependencyGroups": {
     "net5.0": [
+      "DataAccess >= 1.0.0",
       "Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore >= 5.0.3",
       "Microsoft.AspNetCore.Identity.EntityFrameworkCore >= 5.0.3",
       "Microsoft.AspNetCore.Identity.UI >= 5.0.3",
@@ -6166,7 +6191,11 @@
       "frameworks": {
         "net5.0": {
           "targetAlias": "net5.0",
-          "projectReferences": {}
+          "projectReferences": {
+            "C:\\Users\\PC\\Documents\\GitHub\\AthleticsDocs\\DataAccess\\DataAccess.csproj": {
+              "projectPath": "C:\\Users\\PC\\Documents\\GitHub\\AthleticsDocs\\DataAccess\\DataAccess.csproj"
+            }
+          }
         }
       },
       "warningProperties": {
