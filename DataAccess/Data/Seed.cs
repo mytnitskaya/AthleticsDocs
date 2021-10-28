@@ -209,23 +209,130 @@ namespace DataAccess.Data
             ranks.ForEach(x => context.Ranks.Add(x));
             context.SaveChanges();
 
+            var coaches = new List<Coach>()
+            {
+                new Coach()
+                {
+                    Person = people.FirstOrDefault(x => x.LastName == "Мытницкая" && x.FirstName == "Галина"),
+                    City = cities.FirstOrDefault(x => x.Name == "Томск")
+                },
+                new Coach()
+                {
+                    Person = people.FirstOrDefault(x => x.LastName == "Новошинская")
+                }
+            };
+            coaches.ForEach(x => context.Coaches.Add(x));
+            context.SaveChanges();
+
+            var students = new List<Student>()
+            {
+                new Student()
+                {
+                    Person = people.FirstOrDefault(x => x.LastName == "Мытницкая" && x.FirstName == "Мария"),
+                    City = cities.FirstOrDefault(x => x.Name == "Томск"),
+                    Rank = ranks.FirstOrDefault(x => x.Name == "2"),
+                    Organization = organizations.FirstOrDefault(x => x.Name == "МАУ ДО ДЮСШ УСЦ ВВС им. В.А. Шевелева")
+                },
+                new Student()
+                {
+                    Person = people.FirstOrDefault(x => x.LastName == "Симонов"),
+                    Rank = ranks.FirstOrDefault(x => x.Name == "1ю"),
+                },
+                new Student()
+                {
+                    Person = people.FirstOrDefault(x => x.LastName == "Сараева" && x.FirstName == "Ольга"),
+                    Rank = ranks.FirstOrDefault(x => x.Name == "2"),
+                },
+                new Student()
+                {
+                    Person = people.FirstOrDefault(x => x.LastName == "Шмидт"),
+                    Rank = ranks.FirstOrDefault(x => x.Name == "1ю"),
+                },
+                new Student()
+                {
+                    Person = people.FirstOrDefault(x => x.LastName == "Мытницкий"),
+                    Rank = ranks.FirstOrDefault(x => x.Name == "1ю"),
+                },
+                new Student()
+                {
+                    Person = people.FirstOrDefault(x => x.LastName == "Сулейманова"),
+                    Rank = ranks.FirstOrDefault(x => x.Name == "3ю"),
+                },
+                new Student()
+                {
+                    Person = people.FirstOrDefault(x => x.LastName == "Кульменева"),
+                    Rank = ranks.FirstOrDefault(x => x.Name == "2ю"),
+                },
+                new Student()
+                {
+                    Person = people.FirstOrDefault(x => x.LastName == "Васильев"),
+                },
+                new Student()
+                {
+                    Person = people.FirstOrDefault(x => x.LastName == "Маташов"),
+                    Rank = ranks.FirstOrDefault(x => x.Name == "3ю"),
+                },
+                new Student()
+                {
+                    Person = people.FirstOrDefault(x => x.LastName == "Каштанова"),
+                    Rank = ranks.FirstOrDefault(x => x.Name == "3ю"),
+                },
+                new Student()
+                {
+                    Person = people.FirstOrDefault(x => x.LastName == "Кравченко"),
+                    Rank = ranks.FirstOrDefault(x => x.Name == "2ю"),
+                },
+                new Student()
+                {
+                    Person = people.FirstOrDefault(x => x.LastName == "Мерлина"),
+                    Rank = ranks.FirstOrDefault(x => x.Name == "1ю"),
+                },
+                new Student()
+                {
+                    Person = people.FirstOrDefault(x => x.LastName == "Буйнов"),
+                },
+                new Student()
+                {
+                    Person = people.FirstOrDefault(x => x.LastName == "Ефремов"),
+                },
+                new Student()
+                {
+                    Person = people.FirstOrDefault(x => x.LastName == "Бердибаев"),
+                },
+                new Student()
+                {
+                    Person = people.FirstOrDefault(x => x.LastName == "Спирина"),
+                },
+                new Student()
+                {
+                    Person = people.FirstOrDefault(x => x.LastName == "Сараева" && x.FirstName == "Мария"),
+                },
+                new Student()
+                {
+                    Person = people.FirstOrDefault(x => x.LastName == "Вдовенко"),
+                },
+                new Student()
+                {
+                    Person = people.FirstOrDefault(x => x.LastName == "Кульменко"),
+                },
+                new Student()
+                {
+                    Person = people.FirstOrDefault(x => x.LastName == "Абдуллаев"),
+                },
+            };
+            students.ForEach(x => context.Students.Add(x));
+            context.SaveChanges();
 
             var groups = new List<Group>()
             {
                 new Group()
                 {
-                    //Name = "М.Г.П.", 
+                    Name = "М.Г.П.", Coach = coaches.FirstOrDefault(x => x.Person.LastName == "Мытницкая")
                 }
             };
+            groups.ForEach(x => context.Groups.Add(x));
+            context.SaveChanges();
 
-            var coaches = new List<Coach>()
-            {
-                new Coach()
-                {
-                    //Person = people.FirstOrDefault(x => x.LastName == "Мытницкая" && x.FirstName == "Галина"),
-
-                }
-            };
         }
     }
 }
