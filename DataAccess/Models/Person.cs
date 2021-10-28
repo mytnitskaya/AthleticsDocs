@@ -15,9 +15,9 @@ namespace DataAccess.Models
         [Required]
         public DateTime BirthDate { get; set; }
         public string Address { get; set; }
-        [Required]
+        //[Required]
         public string Login { get; set; }
-        [Required]
+        //[Required]
         public string PhoneNumber { get; set; }
     }
 }
