@@ -63,6 +63,27 @@
             </div>
         </div>
         <div class="form-group">
+            <label asp-for="CityId" class="col-md-2 control-label">City</label>
+            <div class="col-md-10">
+                <select asp-for="CityId" asp-items="ViewBag.CitiesList"></select>
+                <span asp-validation-for="CityId" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="OrganizationId" class="col-md-2 control-label">Organization</label>
+            <div class="col-md-10">
+                <select asp-for="OrganizationId" asp-items="ViewBag.OrganizationsList"></select>
+                <span asp-validation-for="OrganizationId" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="GroupId" class="col-md-2 control-label">Group</label>
+            <div class="col-md-10">
+                <select asp-for="GroupId" asp-items="ViewBag.GroupsList"></select>
+                <span asp-validation-for="GroupId" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
                 <input type="submit" value="Create" class="btn btn-default" />
             </div>
