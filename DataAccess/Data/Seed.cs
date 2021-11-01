@@ -313,7 +313,7 @@ namespace DataAccess.Data
                 },
                 new Student()
                 {
-                    Person = people.FirstOrDefault(x => x.LastName == "Кульменко"),
+                    Person = people.FirstOrDefault(x => x.LastName == "Кузьменко"),
                 },
                 new Student()
                 {

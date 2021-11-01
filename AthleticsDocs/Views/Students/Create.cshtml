@@ -14,24 +14,52 @@
         <hr />
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
         <div class="form-group">
-            <label asp-for="Person.LastName" class="col-md-2 control-label"></label>
+            <label asp-for="Person.LastName" class="col-md-2 control-label">Last name</label>
             <div class="col-md-10">
                 <input asp-for="Person.LastName" class="form-control" />
                 <span asp-validation-for="Person.LastName" class="text-danger"></span>
             </div>
         </div>
         <div class="form-group">
-            <label asp-for="Person.FirstName" class="col-md-2 control-label"></label>
+            <label asp-for="Person.FirstName" class="col-md-2 control-label">First name</label>
             <div class="col-md-10">
                 <input asp-for="Person.FirstName" class="form-control" />
                 <span asp-validation-for="Person.FirstName" class="text-danger"></span>
             </div>
         </div>
         <div class="form-group">
-            <label asp-for="Person.BirthDate" class="col-md-2 control-label"></label>
+            <label asp-for="Person.MiddleName" class="col-md-2 control-label">Middle name</label>
+            <div class="col-md-10">
+                <input asp-for="Person.MiddleName" class="form-control" />
+                <span asp-validation-for="Person.MiddleName" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="Person.Gender" class="col-md-2 control-label">Gender</label>
+            <div class="col-md-10">
+                <select asp-for="Person.Gender" asp-items="Html.GetEnumSelectList<Gender>()"></select>
+                <span asp-validation-for="Person.Gender" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="Person.BirthDate" class="col-md-2 control-label">Date of birth</label>
             <div class="col-md-10">
                 <input asp-for="Person.BirthDate" class="form-control" />
                 <span asp-validation-for="Person.BirthDate" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="Person.Address" class="col-md-2 control-label">Address</label>
+            <div class="col-md-10">
+                <input asp-for="Person.Address" class="form-control" />
+                <span asp-validation-for="Person.Address" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="RankId" class="col-md-2 control-label">Rank</label>
+            <div class="col-md-10">
+                <select asp-for="RankId" asp-items="ViewBag.RanksList"></select>
+                <span asp-validation-for="RankId" class="text-danger"></span>
             </div>
         </div>
         <div class="form-group">
