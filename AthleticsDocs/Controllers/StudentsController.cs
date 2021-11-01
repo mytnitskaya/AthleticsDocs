@@ -1,4 +1,6 @@
 ﻿using System.Linq;
+using AthleticsDocs.ViewModels;
+using AthleticsDocs.ViewModels.Students;
 using DataAccess.Data;
 using DataAccess.Models;
 using Microsoft.AspNetCore.Mvc;
@@ -29,12 +31,23 @@ namespace AthleticsDocs.Controllers
         [HttpGet]
         public IActionResult Create()
         {
-            RanksDropDownList();
-            CitiesDropDownList();
-            OrganizationsDropDownList();
-            GroupsDropDownList();
+            var ranksList = _context.Ranks.Select(x => x);
+            var citiesList = _context.Cities.Select(x => x).OrderBy(x => x.Name);
+            var organizationsList = _context.Organizations.Select(x => x)
+                .OrderBy(x => x.Name);
+            var groupsList = _context.Groups.Select(x => x).OrderBy(x => x.Name);
 
-            return View();
+            IndexViewModel index = new IndexViewModel()
+            {
+                Student = new Student(),
+                Ranks = new SelectList(ranksList, nameof(Rank.Id), nameof(Rank.Name)),
+                Cities = new SelectList(citiesList, nameof(City.Id), nameof(City.Name)),
+                Organizations = new SelectList(organizationsList, nameof(Organization.Id),
+                    nameof(Organization.Name)),
+                Groups = new SelectList(groupsList, nameof(Group.Id), nameof(Group.Name))
+            };
+
+            return View(index);
         }
 
         [HttpPost]
@@ -44,7 +57,6 @@ namespace AthleticsDocs.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    //_context.People.Add(student.Person);
                     _context.Students.Add(student);
                     _context.SaveChanges();
                     return RedirectToAction("Index");
@@ -55,35 +67,9 @@ namespace AthleticsDocs.Controllers
                 //Log the error (uncomment dex variable name and add a line here to write a log.)
                 ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists, see your system administrator.");
             }
-            RanksDropDownList(student.RankId);
-            CitiesDropDownList(student.CityId);
-            OrganizationsDropDownList(student.OrganizationId);
-            GroupsDropDownList(student.GroupId);
+
             return View(student);
         }
 
-        private void RanksDropDownList(object selectedRank = null)
-        {
-            //var ranksList = _context.Ranks.Select(x => x).OrderBy(x => x.Name);
-            var ranksList = _context.Ranks.Select(x => x);
-            ViewBag.RanksList = new SelectList(ranksList, nameof(Rank.Id), nameof(Rank.Name), selectedRank);
-        }
-
-        private void CitiesDropDownList(object selectedCity = null)
-        {
-            var citiesList = _context.Cities.Select(x => x).OrderBy(x => x.Name);
-            ViewBag.CitiesList = new SelectList(citiesList, nameof(City.Id), nameof(City.Name), selectedCity);
-        }
-        private void OrganizationsDropDownList(object selectedOrganization = null)
-        {
-            var organizationsList = _context.Organizations.Select(x => x).OrderBy(x => x.Name);
-            ViewBag.OrganizationsList = new SelectList(organizationsList, nameof(Organization.Id), 
-                nameof(Organization.Name), selectedOrganization);
-        }
-        private void GroupsDropDownList(object selectedGroup = null)
-        {
-            var groupsList = _context.Groups.Select(x => x).OrderBy(x => x.Name);
-            ViewBag.GroupsList = new SelectList(groupsList, nameof(Group.Id), nameof(Group.Name), selectedGroup);
-        }
     }
 }

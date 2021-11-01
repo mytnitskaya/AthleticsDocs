@@ -1,5 +1,6 @@
-﻿@using DataAccess.Models
-@model Student
+﻿@using AthleticsDocs.ViewModels.Students
+@using DataAccess.Models
+@model IndexViewModel
 
 @{
     ViewBag.Title = "Create";
@@ -14,73 +15,73 @@
         <hr />
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
         <div class="form-group">
-            <label asp-for="Person.LastName" class="col-md-2 control-label">Last name</label>
+            <label asp-for="Student.Person.LastName" class="col-md-2 control-label">Last name</label>
             <div class="col-md-10">
-                <input asp-for="Person.LastName" class="form-control" />
-                <span asp-validation-for="Person.LastName" class="text-danger"></span>
+                <input asp-for="Student.Person.LastName" class="form-control" />
+                <span asp-validation-for="Student.Person.LastName" class="text-danger"></span>
             </div>
         </div>
         <div class="form-group">
-            <label asp-for="Person.FirstName" class="col-md-2 control-label">First name</label>
+            <label asp-for="Student.Person.FirstName" class="col-md-2 control-label">First name</label>
             <div class="col-md-10">
-                <input asp-for="Person.FirstName" class="form-control" />
-                <span asp-validation-for="Person.FirstName" class="text-danger"></span>
+                <input asp-for="Student.Person.FirstName" class="form-control" />
+                <span asp-validation-for="Student.Person.FirstName" class="text-danger"></span>
             </div>
         </div>
         <div class="form-group">
-            <label asp-for="Person.MiddleName" class="col-md-2 control-label">Middle name</label>
+            <label asp-for="Student.Person.MiddleName" class="col-md-2 control-label">Middle name</label>
             <div class="col-md-10">
-                <input asp-for="Person.MiddleName" class="form-control" />
-                <span asp-validation-for="Person.MiddleName" class="text-danger"></span>
+                <input asp-for="Student.Person.MiddleName" class="form-control" />
+                <span asp-validation-for="Student.Person.MiddleName" class="text-danger"></span>
             </div>
         </div>
         <div class="form-group">
-            <label asp-for="Person.Gender" class="col-md-2 control-label">Gender</label>
+            <label asp-for="Student.Person.Gender" class="col-md-2 control-label">Gender</label>
             <div class="col-md-10">
-                <select asp-for="Person.Gender" asp-items="Html.GetEnumSelectList<Gender>()"></select>
-                <span asp-validation-for="Person.Gender" class="text-danger"></span>
+                <select asp-for="Student.Person.Gender" asp-items="Html.GetEnumSelectList<Gender>()"></select>
+                <span asp-validation-for="Student.Person.Gender" class="text-danger"></span>
             </div>
         </div>
         <div class="form-group">
-            <label asp-for="Person.BirthDate" class="col-md-2 control-label">Date of birth</label>
+            <label asp-for="Student.Person.BirthDate" class="col-md-2 control-label">Date of birth</label>
             <div class="col-md-10">
-                <input asp-for="Person.BirthDate" class="form-control" />
-                <span asp-validation-for="Person.BirthDate" class="text-danger"></span>
+                <input asp-for="Student.Person.BirthDate" class="form-control" />
+                <span asp-validation-for="Student.Person.BirthDate" class="text-danger"></span>
             </div>
         </div>
         <div class="form-group">
-            <label asp-for="Person.Address" class="col-md-2 control-label">Address</label>
+            <label asp-for="Student.Person.Address" class="col-md-2 control-label">Address</label>
             <div class="col-md-10">
-                <input asp-for="Person.Address" class="form-control" />
-                <span asp-validation-for="Person.Address" class="text-danger"></span>
+                <input asp-for="Student.Person.Address" class="form-control" />
+                <span asp-validation-for="Student.Person.Address" class="text-danger"></span>
             </div>
         </div>
         <div class="form-group">
-            <label asp-for="RankId" class="col-md-2 control-label">Rank</label>
+            <label asp-for="Student.RankId" class="col-md-2 control-label">Rank</label>
             <div class="col-md-10">
-                <select asp-for="RankId" asp-items="ViewBag.RanksList"></select>
-                <span asp-validation-for="RankId" class="text-danger"></span>
+                <select asp-for="Student.RankId" asp-items="Model.Ranks"></select>
+                <span asp-validation-for="Student.RankId" class="text-danger"></span>
             </div>
         </div>
         <div class="form-group">
-            <label asp-for="CityId" class="col-md-2 control-label">City</label>
+            <label asp-for="Student.CityId" class="col-md-2 control-label">City</label>
             <div class="col-md-10">
-                <select asp-for="CityId" asp-items="ViewBag.CitiesList"></select>
-                <span asp-validation-for="CityId" class="text-danger"></span>
+                <select asp-for="Student.CityId" asp-items="Model.Cities"></select>
+                <span asp-validation-for="Student.CityId" class="text-danger"></span>
             </div>
         </div>
         <div class="form-group">
-            <label asp-for="OrganizationId" class="col-md-2 control-label">Organization</label>
+            <label asp-for="Student.OrganizationId" class="col-md-2 control-label">Organization</label>
             <div class="col-md-10">
-                <select asp-for="OrganizationId" asp-items="ViewBag.OrganizationsList"></select>
-                <span asp-validation-for="OrganizationId" class="text-danger"></span>
+                <select asp-for="Student.OrganizationId" asp-items="Model.Organizations"></select>
+                <span asp-validation-for="Student.OrganizationId" class="text-danger"></span>
             </div>
         </div>
         <div class="form-group">
-            <label asp-for="GroupId" class="col-md-2 control-label">Group</label>
+            <label asp-for="Student.GroupId" class="col-md-2 control-label">Group</label>
             <div class="col-md-10">
-                <select asp-for="GroupId" asp-items="ViewBag.GroupsList"></select>
-                <span asp-validation-for="GroupId" class="text-danger"></span>
+                <select asp-for="Student.GroupId" asp-items="Model.Groups"></select>
+                <span asp-validation-for="Student.GroupId" class="text-danger"></span>
             </div>
         </div>
         <div class="form-group">
