@@ -28,14 +28,14 @@ namespace AthleticsDocs.Controllers
                 .Include(x => x.Group);
             return View(students);
         }
+
         [HttpGet]
         public IActionResult Create()
         {
-            var ranksList = _context.Ranks.Select(x => x);
-            var citiesList = _context.Cities.Select(x => x).OrderBy(x => x.Name);
-            var organizationsList = _context.Organizations.Select(x => x)
-                .OrderBy(x => x.Name);
-            var groupsList = _context.Groups.Select(x => x).OrderBy(x => x.Name);
+            var ranksList = _context.Ranks.ToList();
+            var citiesList = _context.Cities.OrderBy(x => x.Name).ToList();
+            var organizationsList = _context.Organizations.OrderBy(x => x.Name).ToList();
+            var groupsList = _context.Groups.OrderBy(x => x.Name).ToList();
 
             IndexViewModel index = new IndexViewModel()
             {

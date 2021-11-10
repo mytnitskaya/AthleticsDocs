@@ -1,5 +1,6 @@
 ﻿@using AthleticsDocs.ViewModels.Students
 @using DataAccess.Models
+@using System.Globalization
 @model IndexViewModel
 
 @{
@@ -7,24 +8,23 @@
     Layout = "_Layout";
 }
 
-<h2>Create new student</h2>
+<h3>Create new student</h3>
 
 <form asp-action="Create">
     <div class="form-horizontal">
-        <h4>Student</h4>
         <hr />
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
         <div class="form-group">
             <label asp-for="Student.Person.LastName" class="col-md-2 control-label">Last name</label>
             <div class="col-md-10">
-                <input asp-for="Student.Person.LastName" class="form-control" />
+                <input asp-for="Student.Person.LastName" class="form-control" required=""/>
                 <span asp-validation-for="Student.Person.LastName" class="text-danger"></span>
             </div>
         </div>
         <div class="form-group">
             <label asp-for="Student.Person.FirstName" class="col-md-2 control-label">First name</label>
             <div class="col-md-10">
-                <input asp-for="Student.Person.FirstName" class="form-control" />
+                <input asp-for="Student.Person.FirstName" class="form-control" required=""/>
                 <span asp-validation-for="Student.Person.FirstName" class="text-danger"></span>
             </div>
         </div>
@@ -38,14 +38,15 @@
         <div class="form-group">
             <label asp-for="Student.Person.Gender" class="col-md-2 control-label">Gender</label>
             <div class="col-md-10">
-                <select asp-for="Student.Person.Gender" asp-items="Html.GetEnumSelectList<Gender>()"></select>
+                <select asp-for="Student.Person.Gender" asp-items="Html.GetEnumSelectList<Gender>()" class="form-control"></select>
                 <span asp-validation-for="Student.Person.Gender" class="text-danger"></span>
             </div>
         </div>
         <div class="form-group">
             <label asp-for="Student.Person.BirthDate" class="col-md-2 control-label">Date of birth</label>
             <div class="col-md-10">
-                <input asp-for="Student.Person.BirthDate" class="form-control" />
+                <input min="1921-01-01" max="@DateTime.Today.ToString("yyyy-MM-dd")"
+                       asp-for="Student.Person.BirthDate" class="form-control" required=""/>
                 <span asp-validation-for="Student.Person.BirthDate" class="text-danger"></span>
             </div>
         </div>
@@ -59,34 +60,45 @@
         <div class="form-group">
             <label asp-for="Student.RankId" class="col-md-2 control-label">Rank</label>
             <div class="col-md-10">
-                <select asp-for="Student.RankId" asp-items="Model.Ranks"></select>
+                <select asp-for="Student.RankId" asp-items="Model.Ranks" class="form-control">
+                    <option value=""> Choose rank ...</option>
+                </select>
                 <span asp-validation-for="Student.RankId" class="text-danger"></span>
             </div>
         </div>
         <div class="form-group">
             <label asp-for="Student.CityId" class="col-md-2 control-label">City</label>
             <div class="col-md-10">
-                <select asp-for="Student.CityId" asp-items="Model.Cities"></select>
+                <select asp-for="Student.CityId" asp-items="Model.Cities" class="form-control">
+                    <option value=""> Choose city ...</option>
+                </select>
                 <span asp-validation-for="Student.CityId" class="text-danger"></span>
             </div>
         </div>
         <div class="form-group">
             <label asp-for="Student.OrganizationId" class="col-md-2 control-label">Organization</label>
             <div class="col-md-10">
-                <select asp-for="Student.OrganizationId" asp-items="Model.Organizations"></select>
+                <select asp-for="Student.OrganizationId" asp-items="Model.Organizations" class="form-control">
+                    <option value=""> Choose organization ...</option>
+                </select>
                 <span asp-validation-for="Student.OrganizationId" class="text-danger"></span>
             </div>
         </div>
         <div class="form-group">
             <label asp-for="Student.GroupId" class="col-md-2 control-label">Group</label>
             <div class="col-md-10">
-                <select asp-for="Student.GroupId" asp-items="Model.Groups"></select>
+                <select asp-for="Student.GroupId" asp-items="Model.Groups" class="form-control">
+                    <option value=""> Choose group ...</option>
+                </select>
                 <span asp-validation-for="Student.GroupId" class="text-danger"></span>
             </div>
         </div>
         <div class="form-group">
+            &nbsp;
+        </div>
+        <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
+                <input type="submit" value="Create" class="btn btn-primary mb-2 btn-block" />
             </div>
         </div>
     </div>

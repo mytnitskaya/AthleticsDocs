@@ -13,6 +13,7 @@ namespace DataAccess.Models
         public string MiddleName { get; set; }
         public Gender Gender { get; set; }
         [Required]
+        [DataType(DataType.Date)]
         public DateTime BirthDate { get; set; }
         public string Address { get; set; }
         //[Required]
