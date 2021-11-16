@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using AthleticsDocs.ViewModels;
 using AthleticsDocs.ViewModels.Students;
 using DataAccess.Data;
@@ -69,6 +70,25 @@ namespace AthleticsDocs.Controllers
             }
 
             return View(student);
+        }
+
+        [HttpGet]
+        public IActionResult Delete(Guid id)
+        {
+            var studentToRemove = _context.Students.Include(x => x.Person)
+                .FirstOrDefault(x => x.Id == id);
+            var personToRemove = _context.People.FirstOrDefault(x => x.Id == studentToRemove.Person.Id);
+
+            if (studentToRemove == null)
+            {
+                return NotFound();
+            }
+
+            _context.Students.Remove(studentToRemove);
+            _context.People.Remove(personToRemove);
+            _context.SaveChanges();
+
+            return RedirectToAction(nameof(Index));
         }
 
     }
