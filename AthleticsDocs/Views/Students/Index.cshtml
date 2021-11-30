@@ -12,6 +12,10 @@
     @Html.ActionLink("Create New", "Create")
 </p>
 
+<div id="modDialog" class="modal fade">
+    <div id="dialogContent" class="modal-dialog"></div>
+</div>
+
 <table class="table">
     <thead>
     <tr>
@@ -60,7 +64,7 @@
             <td>
                 <a class="btn btn-primary" asp-action="Delete" asp-route-id="@item.Id">Delete</a> |
                 <a asp-action="Delete" asp-route-id="@item.Id">Update</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Details</a> |
+                <a class="studentCRUD" href="/Students/Details/@item.Id">Details</a>
             </td>
 
         </tr>

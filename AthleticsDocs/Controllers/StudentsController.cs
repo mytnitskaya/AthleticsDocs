@@ -91,5 +91,23 @@ namespace AthleticsDocs.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+
+        [HttpGet]
+        public IActionResult Details(Guid id)
+        {
+            var studentInDetails = _context.Students.Include(x => x.Person)
+                .Include(x => x.Rank)
+                .Include(x => x.City)
+                .Include(x => x.Organization)
+                .Include(x => x.Group)
+                .FirstOrDefault(x => x.Id == id);
+
+            if (studentInDetails == null)
+            {
+                return NotFound();      
+            }
+
+            return PartialView(studentInDetails);
+        }
     }
 }

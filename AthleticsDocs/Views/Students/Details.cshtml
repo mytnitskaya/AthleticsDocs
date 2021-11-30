@@ -1,0 +1,45 @@
+﻿@model DataAccess.Models.Student
+
+<div class="modal-content">
+    <div class="modal-header">
+        <h5>Students pro-file</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">
+                &times;
+            </span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <dl class="dl-horizontal">
+            <dt>Last name:</dt>
+            <dd>@Html.DisplayFor(model => model.Person.LastName)</dd>
+
+            <dt>First name:</dt>
+            <dd>@Html.DisplayFor(model => model.Person.FirstName)</dd>
+
+            <dt>Middle name:</dt>
+            <dd>@Html.DisplayFor(model => model.Person.MiddleName)</dd>
+            
+            <dt>Date of birth:</dt>
+            <dd>@Html.DisplayFor(model => model.Person.BirthDate)</dd>
+            
+            <dt>Gender:</dt>
+            <dd>@Html.DisplayFor(model => model.Person.Gender)</dd>
+            
+            <dt>Address</dt>
+            <dd>@Html.DisplayFor(model => model.Person.Address)</dd>
+            
+            <dt>Rank:</dt>
+            <dd>@Html.DisplayFor(model => model.Rank.Name)</dd>
+            
+            <dt>City:</dt>
+            <dd>@Html.DisplayFor(model => model.City.Name)</dd>
+            
+            <dt>Organization:</dt>
+            <dd>@Html.DisplayFor(model => model.Organization.Name)</dd>
+            
+            <dt>Group:</dt>
+            <dd>@Html.DisplayFor(model => model.Group.Name)</dd>
+        </dl>
+    </div>
+</div>
